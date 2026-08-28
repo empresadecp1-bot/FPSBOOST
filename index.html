@@ -6,24 +6,27 @@
     <title>Painel de Otimização - Avançado</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 text-white font-sans min-h-screen p-6 flex flex-col justify-between">
+<body class="bg-slate-950 text-white font-sans min-h-screen p-6 flex flex-col justify-between relative bg-cover bg-center bg-no-repeat" style="background-image: url('fundo.jpg');">
+
+    <!-- Camada escura por cima da imagem para destacar os textos e botões -->
+    <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-[2px] z-0"></div>
 
     <!-- Topo / Cabeçalho -->
-    <header class="w-full max-w-4xl mx-auto flex justify-between items-center border-b border-slate-800 pb-4">
+    <header class="w-full max-w-4xl mx-auto flex justify-between items-center border-b border-slate-800/80 pb-4 relative z-10">
         <div>
             <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Optimizer Hub Pro
             </h1>
             <p class="text-slate-400 text-xs">Painel Profissional de Desempenho e Periféricos</p>
         </div>
-        <div id="statusTopo" class="text-xs text-cyan-400 font-medium bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 shadow">
+        <div id="statusTopo" class="text-xs text-cyan-400 font-medium bg-slate-900/90 px-3 py-1.5 rounded-lg border border-slate-800 shadow">
             Sistema pronto
         </div>
     </header>
 
     <!-- Tela de Login com Senha -->
-    <div id="loginModal" class="fixed inset-0 bg-slate-950 bg-opacity-95 flex items-center justify-center z-50">
-        <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl w-96 text-center">
+    <div id="loginModal" class="fixed inset-0 bg-slate-950/90 flex items-center justify-center z-50">
+        <div class="bg-slate-900/95 border border-slate-800 p-8 rounded-2xl shadow-2xl w-96 text-center backdrop-blur-md">
             <h2 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
                 Acesso Restrito
             </h2>
@@ -40,10 +43,10 @@
     </div>
 
     <!-- Painel de Otimização (Inicia Oculto, Organizado em Grid Estético) -->
-    <main id="painelHub" class="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 my-auto hidden">
+    <main id="painelHub" class="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 my-auto relative z-10 hidden">
         
         <!-- Bloco 1: Desempenho do Jogo -->
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md">
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     <span class="text-xl">🚀</span>
@@ -57,7 +60,7 @@
         </div>
 
         <!-- Bloco 2: Periférico Teclado -->
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md">
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     <span class="text-xl">⌨️</span>
@@ -71,7 +74,7 @@
         </div>
 
         <!-- Bloco 3: Periférico Mouse -->
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md">
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     <span class="text-xl">🖱️</span>
@@ -85,7 +88,7 @@
         </div>
 
         <!-- Bloco 4: Boost Completo / Geral -->
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md">
             <div>
                 <div class="flex items-center gap-2 mb-3">
                     <span class="text-xl">⚡</span>
@@ -101,7 +104,7 @@
     </main>
 
     <!-- Rodapé -->
-    <footer class="w-full max-w-4xl mx-auto text-center border-t border-slate-800 pt-4 text-xs text-slate-500">
+    <footer class="w-full max-w-4xl mx-auto text-center border-t border-slate-800/80 pt-4 text-xs text-slate-500 relative z-10">
         Optimizer Hub &bull; Todos os direitos reservados.
     </footer>
 
@@ -144,11 +147,11 @@
             botao.disabled = true;
             botao.classList.add('opacity-50', 'cursor-not-allowed');
             statusTopo.innerText = msgInicio;
-            statusTopo.className = "text-xs text-cyan-400 font-medium bg-slate-900 px-3 py-1.5 rounded-lg border border-cyan-500/30 shadow animate-pulse";
+            statusTopo.className = "text-xs text-cyan-400 font-medium bg-slate-900/90 px-3 py-1.5 rounded-lg border border-cyan-500/30 shadow animate-pulse";
 
             setTimeout(() => {
                 statusTopo.innerText = msgFim;
-                statusTopo.className = "text-xs text-emerald-400 font-medium bg-slate-900 px-3 py-1.5 rounded-lg border border-emerald-500/30 shadow";
+                statusTopo.className = "text-xs text-emerald-400 font-medium bg-slate-900/90 px-3 py-1.5 rounded-lg border border-emerald-500/30 shadow";
                 botao.disabled = false;
                 botao.classList.remove('opacity-50', 'cursor-not-allowed');
             }, 2500);
