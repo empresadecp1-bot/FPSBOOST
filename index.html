@@ -11,20 +11,21 @@
     <!-- Camada escura por cima da imagem -->
     <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-[3px] z-0"></div>
 
-    <!-- 1. Tela de Carregamento Inicial (Visível por padrão para garantir que apareça) -->
+    <!-- 1. Tela de Carregamento Inicial com Textos Dinâmicos das Otimizações -->
     <div id="initialLoading" class="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-50 transition-opacity duration-700">
         <div class="relative w-20 h-20 mb-6">
             <div class="absolute inset-0 border-4 border-slate-800 rounded-full"></div>
             <div class="absolute inset-0 border-4 border-cyan-400 rounded-full animate-spin border-t-transparent"></div>
         </div>
-        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2 animate-pulse">
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
             Optimizer Hub Pro
         </h1>
-        <p id="loadingStatus" class="text-slate-400 text-sm tracking-wide">Carregando recursos do sistema...</p>
+        <!-- Texto dinâmico que muda durante o carregamento -->
+        <p id="loadingStatus" class="text-cyan-400 text-sm tracking-wide font-medium h-6">Iniciando motor de otimização...</p>
         
         <!-- Barra de Progresso -->
-        <div class="w-64 h-1.5 bg-slate-900 rounded-full mt-6 overflow-hidden border border-slate-800">
-            <div id="progressBar" class="h-full bg-cyan-400 w-0 transition-all duration-300"></div>
+        <div class="w-72 h-2 bg-slate-900 rounded-full mt-6 overflow-hidden border border-slate-800 shadow-inner">
+            <div id="progressBar" class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 w-0 transition-all duration-300"></div>
         </div>
     </div>
 
@@ -133,7 +134,7 @@
     </footer>
 
     <script>
-        // Executa a barra de progresso garantindo tempo visual para a animação
+        // Controla o carregamento inicial e altera os textos das otimizações dinamicamente
         window.addEventListener('load', () => {
             const progressBar = document.getElementById('progressBar');
             const loadingStatus = document.getElementById('loadingStatus');
@@ -142,12 +143,23 @@
 
             let progress = 0;
             const interval = setInterval(() => {
-                progress += 12;
+                progress += 10;
+
+                // Altera o texto de acordo com o progresso atual
+                if (progress <= 25) {
+                    loadingStatus.innerText = "Carregando arquivos de registro do sistema...";
+                } else if (progress <= 55) {
+                    loadingStatus.innerText = "Otimizando núcleos de CPU e prioridade de GPU...";
+                } else if (progress <= 85) {
+                    loadingStatus.innerText = "Aplicando patches de baixa latência em periféricos...";
+                } else {
+                    loadingStatus.innerText = "Inicialização concluída com sucesso!";
+                }
+
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(interval);
                     
-                    loadingStatus.innerText = "Sistema pronto!";
                     setTimeout(() => {
                         initialLoading.classList.add('opacity-0');
                         setTimeout(() => {
@@ -158,7 +170,7 @@
                     }, 400);
                 }
                 progressBar.style.width = progress + '%';
-            }, 180);
+            }, 200);
         });
 
         function verificarSenha() {
