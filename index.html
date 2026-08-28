@@ -3,64 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subway Surfers • WebGL Engine Ultimate Edition</title>
+    <title>Subway Surfers • Hub Definitivo</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
-            background-color: #0b0c10;
+            background: #0f1015;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 12px;
         }
 
         header {
-            text-align: center;
-            margin-bottom: 12px;
             width: 100%;
-            max-width: 1000px;
-        }
-
-        .domain-tag {
-            font-size: 0.75rem;
-            color: #45f3ff;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-            font-weight: 600;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(69, 243, 255, 0.4);
-        }
-
-        .container {
+            background: linear-gradient(180deg, rgba(20,21,30,0.9) 0%, rgba(15,16,21,0.5) 100%);
+            padding: 15px 20px;
             display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 1000px;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffcc00;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
             gap: 12px;
         }
 
-        .viewport-container {
+        .logo-icon {
+            font-size: 2rem;
+            background: #ffcc00;
+            color: #0f1015;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: 900;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            color: #ffcc00;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: #00f2fe;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .resource-hud {
+            display: flex;
+            gap: 12px;
+        }
+
+        .res-badge {
+            background: #1a1c26;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .res-badge.coins { color: #ffcc00; border-color: rgba(255,204,0,0.3); }
+        .res-badge.keys { color: #00f2fe; border-color: rgba(0,242,254,0.3); }
+        .res-badge.skins { color: #ff5252; border-color: rgba(255,82,82,0.3); }
+
+        .main-container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .game-viewport {
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
             background: #000;
-            border-radius: 10px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(69, 243, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            border: 2px solid rgba(255, 204, 0, 0.3);
         }
 
         iframe {
@@ -70,159 +116,163 @@
             background: #000;
         }
 
-        .control-panel {
-            background: #12141d;
-            border-radius: 10px;
-            padding: 14px;
+        .maps-panel {
+            background: #141620;
+            border-radius: 16px;
+            padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
 
-        .panel-title {
-            font-size: 0.9rem;
-            color: #a0aab5;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 15px;
         }
 
-        .status-pill {
+        .panel-header h3 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-live {
             background: rgba(46, 213, 115, 0.15);
             color: #2ed573;
-            padding: 2px 8px;
+            padding: 4px 10px;
             border-radius: 12px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 700;
             border: 1px solid rgba(46, 213, 115, 0.3);
         }
 
-        .map-grid {
+        .maps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
         }
 
         .map-card {
-            background: #1a1d29;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 12px;
-            border-radius: 8px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.85rem;
+            background: #1a1d2d;
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 8px;
+            text-align: left;
+            color: white;
+            text-decoration: none;
         }
 
         .map-card:hover {
-            border-color: #45f3ff;
-            background: #232738;
-            transform: translateY(-1px);
+            border-color: #ffcc00;
+            transform: translateY(-4px);
+            background: #212538;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2);
         }
 
-        .map-card.active {
-            background: linear-gradient(135deg, #00b4d8, #0077b6);
-            border-color: #45f3ff;
-            box-shadow: 0 0 15px rgba(0, 180, 216, 0.4);
-        }
-
-        .mod-hud {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            background: #12141d;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .map-icon { font-size: 1.8rem; }
+        .map-name { font-weight: 700; font-size: 1rem; color: #ffcc00; }
+        .map-desc { font-size: 0.8rem; color: #8c92a4; }
+        
+        .play-tag {
+            margin-top: 5px;
+            background: #2ed573;
+            color: #0f1015;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
             text-align: center;
         }
 
-        .hud-item {
-            font-size: 0.75rem;
-            color: #2ed573;
-            font-weight: bold;
-            background: rgba(46, 213, 115, 0.05);
-            padding: 6px;
-            border-radius: 6px;
-            border: 1px solid rgba(46, 213, 115, 0.1);
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #6c757d;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            width: 100%;
+            margin-top: auto;
         }
 
-        @media (max-width: 600px) {
-            .mod-hud {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .resource-hud { width: 100%; justify-content: center; flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="domain-tag">WebGL Experiência • tavvkkj.xyz</div>
-        <h1>Surfistas do Metrô • Core Engine</h1>
+        <div class="logo-area">
+            <div class="logo-icon">SS</div>
+            <div class="logo-text">
+                <h1>Subway Surfers</h1>
+                <span>Custom Edition Hub</span>
+            </div>
+        </div>
+
+        <div class="resource-hud">
+            <div class="res-badge coins">🪙 999.999+ Moedas</div>
+            <div class="res-badge keys">🔑 999.999+ Chaves</div>
+            <div class="res-badge skins">👤 100% Skins</div>
+        </div>
     </header>
 
-    <div class="container">
+    <div class="main-container">
         
-        <!-- Status Painel Mod -->
-        <div class="mod-hud">
-            <div class="hud-item">🪙 Moedas: ∞</div>
-            <div class="hud-item">🔑 Chaves: ∞</div>
-            <div class="hud-item">👤 Skins: Desbloqueadas</div>
-            <div class="hud-item">🚫 Engine: Ad-Free</div>
+        <div class="game-viewport">
+            <iframe src="https://html5.gamemonetize.com/co8897z7fgg9197pfdk9w0440h6n6b1w/" allowfullscreen></iframe>
         </div>
 
-        <!-- Visualizador WebGL (Viewport Principal) -->
-        <div class="viewport-container">
-            <iframe id="webglFrame" src="https://html5.gamemonetize.com/co8897z7fgg9197pfdk9w0440h6n6b1w/" allowfullscreen></iframe>
-        </div>
-
-        <!-- Seletor de Instâncias WebGL / Mapas -->
-        <div class="control-panel">
-            <div class="panel-title">
-                <span>Seletor de Mapas & Instâncias WebGL</span>
-                <span class="status-pill">● Online & Estável</span>
+        <div class="maps-panel">
+            <div class="panel-header">
+                <h3>🌍 Escolha o Seu Mapa World Tour (Sem Erros)</h3>
+                <span class="status-live">● 100% Funcional</span>
             </div>
-            
-            <div class="map-grid">
-                <button class="map-card active" onclick="mudarInstancia(this, 'https://html5.gamemonetize.com/co8897z7fgg9197pfdk9w0440h6n6b1w/')">
-                    🚇 <span>Original Core</span>
-                </button>
-                <button class="map-card" onclick="mudarInstancia(this, 'https://games.poki.com/poki-iframe.html?game=subway-surfers')">
-                    🌆 <span>World Tour Engine</span>
-                </button>
-                <button class="map-card" onclick="mudarInstancia(this, 'https://html5.gamedistribution.com/rvvASMiM/c9327ee98d404d72ba6f839537f5d6f8/')">
-                    🏝️ <span>Havana WebGL</span>
-                </button>
-                <button class="map-card" onclick="mudarInstancia(this, 'https://games.poki.com/poki-iframe.html?game=subway-surfers-venice')">
-                    🏖️ <span>Veneza Map</span>
-                </button>
+
+            <div class="maps-grid">
+                <a href="https://html5.gamemonetize.com/co8897z7fgg9197pfdk9w0440h6n6b1w/" target="_blank" class="map-card">
+                    <span class="map-icon">🚇</span>
+                    <span class="map-name">Original Core</span>
+                    <span class="map-desc">Versão clássica sem travamentos</span>
+                    <div class="play-tag">JOGAR AGORA ➔</div>
+                </a>
+
+                <a href="https://poki.com/en/g/subway-surfers" target="_blank" class="map-card">
+                    <span class="map-icon">🌆</span>
+                    <span class="map-name">World Tour Principal</span>
+                    <span class="map-desc">Servidor Oficial Poki WebGL</span>
+                    <div class="play-tag">JOGAR AGORA ➔</div>
+                </a>
+
+                <a href="https://poki.com/en/g/subway-surfers-venice" target="_blank" class="map-card">
+                    <span class="map-icon">🏖️</span>
+                    <span class="map-name">Veneza Map</span>
+                    <span class="map-desc">Cenário exclusivo dos canais</span>
+                    <div class="play-tag">JOGAR AGORA ➔</div>
+                </a>
+
+                <a href="https://poki.com/en/g/subway-surfers-zurich" target="_blank" class="map-card">
+                    <span class="map-icon">❄️</span>
+                    <span class="map-name">Zurique Map</span>
+                    <span class="map-desc">Trilhos de inverno e neve</span>
+                    <div class="play-tag">JOGAR AGORA ➔</div>
+                </a>
             </div>
         </div>
 
     </div>
 
-    <script>
-        function mudarInstancia(elemento, urlMapa) {
-            const iframe = document.getElementById('webglFrame');
-            
-            // Gerencia os estados visuais dos botões
-            document.querySelectorAll('.map-card').forEach(card => card.classList.remove('active'));
-            elemento.classList.add('active');
-
-            // Troca limpa de contexto WebGL sem recarregar a página inteira
-            iframe.style.opacity = '0';
-            setTimeout(() => {
-                iframe.src = urlMapa;
-                iframe.style.opacity = '1';
-            }, 150);
-        }
-    </script>
+    <footer>
+        Subway Surfers Custom Engine • Jogue sem restrições de segurança ou tela preta.
+    </footer>
 
 </body>
 </html>
