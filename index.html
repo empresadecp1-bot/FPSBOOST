@@ -3,38 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Otimização - Avançado</title>
+    <title>Painel de Otimização - Boost</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 text-white font-sans min-h-screen p-6 flex flex-col justify-between relative bg-cover bg-center bg-no-repeat" style="background-image: url('fundo.jpg');">
+<body class="bg-slate-950 text-white font-sans min-h-screen flex items-center justify-center relative bg-cover bg-center bg-no-repeat overflow-hidden" style="background-image: url('fundo.jpg');">
 
-    <!-- Camada escura por cima da imagem para destacar os textos e botões -->
-    <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-[2px] z-0"></div>
-
-    <!-- Topo / Cabeçalho -->
-    <header class="w-full max-w-4xl mx-auto flex justify-between items-center border-b border-slate-800/80 pb-4 relative z-10">
-        <div>
-            <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Optimizer Hub Pro
-            </h1>
-            <p class="text-slate-400 text-xs">Painel Profissional de Desempenho e Periféricos</p>
-        </div>
-        <div id="statusTopo" class="text-xs text-cyan-400 font-medium bg-slate-900/90 px-3 py-1.5 rounded-lg border border-slate-800 shadow">
-            Sistema pronto
-        </div>
-    </header>
+    <!-- Camada escura por cima da imagem -->
+    <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-[3px] z-0"></div>
 
     <!-- Tela de Login com Senha -->
-    <div id="loginModal" class="fixed inset-0 bg-slate-950/90 flex items-center justify-center z-50">
-        <div class="bg-slate-900/95 border border-slate-800 p-8 rounded-2xl shadow-2xl w-96 text-center backdrop-blur-md">
-            <h2 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
+    <div id="loginModal" class="absolute inset-0 bg-slate-950/95 flex items-center justify-center z-50">
+        <div class="bg-slate-900/95 border border-slate-800 p-8 rounded-2xl shadow-2xl w-[450px] text-center backdrop-blur-md mx-4">
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
                 Acesso Restrito
-            </h2>
-            <p class="text-slate-400 text-sm mb-6">Digite a senha para desbloquear o painel</p>
+            </h1>
+            <p class="text-slate-400 text-sm mb-6">Digite a senha para acessar o painel</p>
 
             <input type="password" id="senhaInput" placeholder="Digite a senha..." class="w-full px-4 py-3 mb-4 bg-slate-950 border border-slate-800 rounded-xl text-white text-center focus:outline-none focus:border-cyan-500 transition-colors">
             
-            <button onclick="verificarSenha()" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all duration-300 transform active:scale-95 shadow-lg shadow-cyan-500/20">
+            <button onclick="verificarSenha()" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all duration-300 transform active:scale-95 shadow-lg shadow-cyan-500/25">
                 Entrar
             </button>
 
@@ -42,71 +29,35 @@
         </div>
     </div>
 
-    <!-- Painel de Otimização (Inicia Oculto, Organizado em Grid Estético) -->
-    <main id="painelHub" class="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 my-auto relative z-10 hidden">
-        
-        <!-- Bloco 1: Desempenho do Jogo -->
-        <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md">
-            <div>
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="text-xl">🚀</span>
-                    <h2 class="font-bold text-lg text-slate-200">Aumentar FPS</h2>
-                </div>
-                <p class="text-slate-400 text-xs mb-6">Aplica tweaks de registro, prioridade máxima de hardware e otimização do núcleo gráfico.</p>
-            </div>
-            <button onclick="executarFuncao('fps', this)" class="w-full py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-semibold rounded-xl transition-all text-sm shadow">
-                Otimizar FPS
+    <!-- Painel de Otimização Esticado (Inicia Oculto) -->
+    <div id="painelHub" class="bg-slate-900/90 border border-slate-800 p-10 rounded-3xl shadow-2xl w-[600px] text-center backdrop-blur-md relative z-10 mx-4 hidden">
+        <h1 class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-1">
+            Optimizer Hub Pro
+        </h1>
+        <p class="text-slate-400 text-sm mb-8">Painel de Desempenho e Periféricos</p>
+
+        <!-- Botões Esticados -->
+        <div class="space-y-4">
+            <button onclick="executarFuncao('fps', this)" class="w-full py-4 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-bold rounded-2xl transition-all text-base shadow-lg flex items-center justify-center gap-3">
+                🚀 Aumentar FPS (Prioridade Máxima)
+            </button>
+
+            <button onclick="executarFuncao('teclado', this)" class="w-full py-4 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-bold rounded-2xl transition-all text-base shadow-lg flex items-center justify-center gap-3">
+                ⌨️ Boost do Teclado (Zerar Delay)
+            </button>
+
+            <button onclick="executarFuncao('mouse', this)" class="w-full py-4 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-bold rounded-2xl transition-all text-base shadow-lg flex items-center justify-center gap-3">
+                🖱️ Boost do Mouse (Ajustar Polling/Sensibilidade)
+            </button>
+
+            <button onclick="executarFuncao('geral', this)" class="w-full py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-2xl transition-all transform active:scale-95 shadow-xl shadow-cyan-500/25 text-base flex items-center justify-center gap-3 mt-2">
+                ⚡ Executar Boost Completo
             </button>
         </div>
 
-        <!-- Bloco 2: Periférico Teclado -->
-        <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md">
-            <div>
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="text-xl">⌨️</span>
-                    <h2 class="font-bold text-lg text-slate-200">Boost do Teclado</h2>
-                </div>
-                <p class="text-slate-400 text-xs mb-6">Remove o atraso de repetição de teclas (Filter Keys) e acelera o tempo de resposta do teclado.</p>
-            </div>
-            <button onclick="executarFuncao('teclado', this)" class="w-full py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-semibold rounded-xl transition-all text-sm shadow">
-                Otimizar Teclado
-            </button>
-        </div>
-
-        <!-- Bloco 3: Periférico Mouse -->
-        <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md">
-            <div>
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="text-xl">🖱️</span>
-                    <h2 class="font-bold text-lg text-slate-200">Boost do Mouse</h2>
-                </div>
-                <p class="text-slate-400 text-xs mb-6">Ajusta o Polling Rate USB e remove a aceleração indesejada para mira perfeita.</p>
-            </div>
-            <button onclick="executarFuncao('mouse', this)" class="w-full py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-semibold rounded-xl transition-all text-sm shadow">
-                Otimizar Mouse
-            </button>
-        </div>
-
-        <!-- Bloco 4: Boost Completo / Geral -->
-        <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md">
-            <div>
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="text-xl">⚡</span>
-                    <h2 class="font-bold text-lg text-slate-200">Boost Completo</h2>
-                </div>
-                <p class="text-slate-400 text-xs mb-6">Limpa arquivos temporários do sistema, otimiza memória RAM e aplica todas as correções de uma vez.</p>
-            </div>
-            <button onclick="executarFuncao('geral', this)" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all transform active:scale-95 shadow-lg shadow-cyan-500/20 text-sm">
-                Executar Boost Geral
-            </button>
-        </div>
-
-    </main>
-
-    <!-- Rodapé -->
-    <footer class="w-full max-w-4xl mx-auto text-center border-t border-slate-800/80 pt-4 text-xs text-slate-500 relative z-10">
-        Optimizer Hub &bull; Todos os direitos reservados.
-    </footer>
+        <!-- Status -->
+        <div id="status" class="mt-6 text-sm text-slate-400 font-medium min-h-[24px]">Sistema pronto para otimizar.</div>
+    </div>
 
     <script>
         function verificarSenha() {
@@ -125,33 +76,32 @@
         }
 
         function executarFuncao(tipo, botao) {
-            const statusTopo = document.getElementById('statusTopo');
-            
+            const status = document.getElementById('status');
             let msgInicio = "";
             let msgFim = "";
 
             if (tipo === 'fps') {
-                msgInicio = "Otimizando FPS e registro...";
-                msgFim = "FPS Otimizado com sucesso! 🚀";
+                msgInicio = "Otimizando FPS e registro do sistema...";
+                msgFim = "FPS Aumentado com sucesso! 🚀";
             } else if (tipo === 'teclado') {
-                msgInicio = "Aplicando boost no teclado...";
-                msgFim = "Teclado otimizado com sucesso! ⌨️";
+                msgInicio = "Aplicando boost e zerando delay do teclado...";
+                msgFim = "Boost do Teclado aplicado! ⌨️";
             } else if (tipo === 'mouse') {
-                msgInicio = "Ajustando taxa do sensor USB...";
-                msgFim = "Mouse otimizado com sucesso! 🖱️";
+                msgInicio = "Ajustando Polling Rate e sensor do mouse...";
+                msgFim = "Boost do Mouse aplicado com sucesso! 🖱️";
             } else if (tipo === 'geral') {
-                msgInicio = "Executando limpeza e boost total...";
-                msgFim = "Boost Completo finalizado! 🔥";
+                msgInicio = "Executando limpeza profunda e boost completo...";
+                msgFim = "Boost Completo finalizado com sucesso! 🔥";
             }
 
             botao.disabled = true;
             botao.classList.add('opacity-50', 'cursor-not-allowed');
-            statusTopo.innerText = msgInicio;
-            statusTopo.className = "text-xs text-cyan-400 font-medium bg-slate-900/90 px-3 py-1.5 rounded-lg border border-cyan-500/30 shadow animate-pulse";
+            status.innerText = msgInicio;
+            status.className = "mt-6 text-sm text-cyan-400 font-medium min-h-[24px] animate-pulse";
 
             setTimeout(() => {
-                statusTopo.innerText = msgFim;
-                statusTopo.className = "text-xs text-emerald-400 font-medium bg-slate-900/90 px-3 py-1.5 rounded-lg border border-emerald-500/30 shadow";
+                status.innerText = msgFim;
+                status.className = "mt-6 text-sm text-emerald-400 font-medium min-h-[24px]";
                 botao.disabled = false;
                 botao.classList.remove('opacity-50', 'cursor-not-allowed');
             }, 2500);
