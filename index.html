@@ -11,7 +11,7 @@
     <!-- Camada escura por cima da imagem -->
     <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-[3px] z-0"></div>
 
-    <!-- 1. TELA DE CARREGAMENTO INICIAL (Garantida antes da senha) -->
+    <!-- 1. TELA DE CARREGAMENTO INICIAL -->
     <div id="initialLoading" class="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-50 transition-opacity duration-700">
         <div class="relative w-20 h-20 mb-6">
             <div class="absolute inset-0 border-4 border-slate-800 rounded-full"></div>
@@ -20,16 +20,14 @@
         <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
             Optimizer Hub Pro
         </h1>
-        <!-- Texto dinâmico das otimizações -->
         <p id="loadingStatus" class="text-cyan-400 text-sm tracking-wide font-medium h-6 text-center px-4">Iniciando motor de otimização...</p>
         
-        <!-- Barra de Progresso -->
         <div class="w-72 h-2 bg-slate-900 rounded-full mt-6 overflow-hidden border border-slate-800 shadow-inner">
             <div id="progressBar" class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 w-0 transition-all duration-300"></div>
         </div>
     </div>
 
-    <!-- 2. TELA DE LOGIN COM SENHA (Inicia oculta, aparece 100% após o carregamento) -->
+    <!-- 2. TELA DE LOGIN COM SENHA -->
     <div id="loginModal" class="fixed inset-0 bg-slate-950/95 flex items-center justify-center z-40 hidden opacity-0 transition-opacity duration-500">
         <div class="bg-slate-900/95 border border-slate-800 p-8 rounded-3xl shadow-2xl w-[420px] text-center backdrop-blur-md mx-4">
             <h2 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
@@ -47,7 +45,7 @@
         </div>
     </div>
 
-    <!-- 3. TELA DE CARREGAMENTO INTERNA (Aparece ao clicar em otimizar) -->
+    <!-- 3. TELA DE CARREGAMENTO INTERNA -->
     <div id="loadingModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center z-50 hidden">
         <div class="w-16 h-16 border-4 border-slate-800 border-t-cyan-400 rounded-full animate-spin mb-4"></div>
         <h2 id="loadingText" class="text-xl font-bold text-cyan-400 tracking-wide animate-pulse">Otimizando sistema...</h2>
@@ -67,7 +65,7 @@
         </div>
     </header>
 
-    <!-- Painel de Otimização em Grid Moderno (Inicia Oculto) -->
+    <!-- Painel de Otimização em Grid Moderno -->
     <main id="painelHub" class="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 my-auto relative z-10 hidden">
         
         <!-- Card 1: FPS -->
@@ -98,17 +96,28 @@
             </button>
         </div>
 
-        <!-- Card 3: Mouse -->
+        <!-- Card 3: Mouse (Com ajuste de sensibilidade) -->
         <div class="bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)] group">
             <div>
                 <div class="flex items-center gap-3 mb-3">
                     <span class="text-2xl p-2 bg-slate-800/80 rounded-xl border border-slate-700 group-hover:scale-110 transition-transform">🖱️</span>
                     <h2 class="font-bold text-lg text-slate-200">Boost do Mouse</h2>
                 </div>
-                <p class="text-slate-400 text-xs mb-6 leading-relaxed">Ajusta o Polling Rate USB e remove a aceleração indesejada para garantir uma mira limpa e precisa.</p>
+                <p class="text-slate-400 text-xs mb-4 leading-relaxed">Ajusta o Polling Rate USB e remove a aceleração indesejada para garantir uma mira limpa.</p>
+                
+                <!-- Controle de Sensibilidade -->
+                <div class="mb-4 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-xs text-slate-300 font-medium">Sensibilidade / Multiplicador:</span>
+                        <span id="sensValue" class="text-xs text-cyan-400 font-bold">1.0x</span>
+                    </div>
+                    <input type="range" id="sensRange" min="0.5" max="2.0" step="0.1" value="1.0" 
+                        oninput="document.getElementById('sensValue').innerText = this.value + 'x'"
+                        class="w-full accent-cyan-400 bg-slate-800 h-1.5 rounded-lg cursor-pointer">
+                </div>
             </div>
             <button onclick="executarFuncao('mouse', this)" class="w-full py-3 bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 border border-slate-700 hover:border-cyan-400 text-cyan-400 font-semibold rounded-xl transition-all duration-300 text-sm shadow flex items-center justify-center gap-2 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]">
-                Otimizar Mouse
+                Aplicar Sensibilidade e Boost
             </button>
         </div>
 
@@ -134,7 +143,6 @@
     </footer>
 
     <script>
-        // Execução garantida da tela de carregamento inicial com textos das otimizações
         window.addEventListener('DOMContentLoaded', () => {
             const progressBar = document.getElementById('progressBar');
             const loadingStatus = document.getElementById('loadingStatus');
@@ -145,7 +153,6 @@
             const interval = setInterval(() => {
                 progress += 10;
 
-                // Textos dinâmicos baseados no progresso
                 if (progress <= 25) {
                     loadingStatus.innerText = "Carregando arquivos de registro do sistema...";
                 } else if (progress <= 55) {
@@ -206,8 +213,9 @@
                 mensagem = "Removendo delay do teclado...";
                 msgSucesso = "Teclado otimizado com sucesso! ⌨️";
             } else if (tipo === 'mouse') {
-                mensagem = "Ajustando polling rate e sensor USB...";
-                msgSucesso = "Mouse otimizado com sucesso! 🖱️";
+                const sensibilidade = document.getElementById('sensRange').value;
+                mensagem = `Aplicando sensibilidade (${sensibilidade}x) e limpando sensor USB...`;
+                msgSucesso = `Mouse otimizado (${sensibilidade}x) com sucesso! 🖱️`;
             } else if (tipo === 'geral') {
                 mensagem = "Executando limpeza profunda e boost total...";
                 msgSucesso = "Boost Completo finalizado! 🔥";
