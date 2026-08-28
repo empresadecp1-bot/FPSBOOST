@@ -8,10 +8,8 @@
 </head>
 <body class="bg-slate-950 text-white font-sans min-h-screen flex items-center justify-center relative bg-cover bg-center bg-no-repeat overflow-hidden" style="background-image: url('fundo.jpg');">
 
-    <!-- Camada escura por cima da imagem -->
     <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-[3px] z-0"></div>
 
-    <!-- Tela de Login com Senha -->
     <div id="loginModal" class="absolute inset-0 bg-slate-950/95 flex items-center justify-center z-50">
         <div class="bg-slate-900/95 border border-slate-800 p-8 rounded-2xl shadow-2xl w-[450px] text-center backdrop-blur-md mx-4">
             <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
@@ -29,33 +27,30 @@
         </div>
     </div>
 
-    <!-- Painel de Otimização Esticado (Inicia Oculto) -->
     <div id="painelHub" class="bg-slate-900/90 border border-slate-800 p-10 rounded-3xl shadow-2xl w-[600px] text-center backdrop-blur-md relative z-10 mx-4 hidden">
         <h1 class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-1">
             Optimizer Hub Pro
         </h1>
         <p class="text-slate-400 text-sm mb-8">Painel de Desempenho e Periféricos</p>
 
-        <!-- Botões Esticados -->
         <div class="space-y-4">
-            <button onclick="executarFuncao('fps', this)" class="w-full py-4 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-bold rounded-2xl transition-all text-base shadow-lg flex items-center justify-center gap-3">
+            <button onclick="executarFuncao('fps', this)" class="w-full py-4 bg-slate-800/90 hover:bg-cyan-950/40 border border-slate-700 hover:border-cyan-400 text-cyan-400 font-bold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] text-base shadow-lg flex items-center justify-center gap-3">
                 🚀 Aumentar FPS (Prioridade Máxima)
             </button>
 
-            <button onclick="executarFuncao('teclado', this)" class="w-full py-4 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-bold rounded-2xl transition-all text-base shadow-lg flex items-center justify-center gap-3">
+            <button onclick="executarFuncao('teclado', this)" class="w-full py-4 bg-slate-800/90 hover:bg-cyan-950/40 border border-slate-700 hover:border-cyan-400 text-cyan-400 font-bold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] text-base shadow-lg flex items-center justify-center gap-3">
                 ⌨️ Boost do Teclado (Zerar Delay)
             </button>
 
-            <button onclick="executarFuncao('mouse', this)" class="w-full py-4 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-bold rounded-2xl transition-all text-base shadow-lg flex items-center justify-center gap-3">
+            <button onclick="executarFuncao('mouse', this)" class="w-full py-4 bg-slate-800/90 hover:bg-cyan-950/40 border border-slate-700 hover:border-cyan-400 text-cyan-400 font-bold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] text-base shadow-lg flex items-center justify-center gap-3">
                 🖱️ Boost do Mouse (Ajustar Polling/Sensibilidade)
             </button>
 
-            <button onclick="executarFuncao('geral', this)" class="w-full py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-2xl transition-all transform active:scale-95 shadow-xl shadow-cyan-500/25 text-base flex items-center justify-center gap-3 mt-2">
+            <button onclick="executarFuncao('geral', this)" class="w-full py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-xl shadow-cyan-500/30 hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] text-base flex items-center justify-center gap-3 mt-2">
                 ⚡ Executar Boost Completo
             </button>
         </div>
 
-        <!-- Status -->
         <div id="status" class="mt-6 text-sm text-slate-400 font-medium min-h-[24px]">Sistema pronto para otimizar.</div>
     </div>
 
