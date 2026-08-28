@@ -6,17 +6,34 @@
     <title>Optimizer Hub Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 text-white font-sans min-h-screen p-6 flex flex-col justify-between relative bg-cover bg-center bg-no-repeat" style="background-image: url('fundo.jpg');">
+<body class="bg-slate-950 text-white font-sans min-h-screen p-6 flex flex-col justify-between relative bg-cover bg-center bg-no-repeat overflow-hidden" style="background-image: url('fundo.jpg');">
 
     <!-- Camada escura por cima da imagem -->
     <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-[3px] z-0"></div>
 
-    <!-- Tela de Login com Senha -->
-    <div id="loginModal" class="fixed inset-0 bg-slate-950/95 flex items-center justify-center z-50">
+    <!-- 1. Tela de Carregamento Inicial (Aparece ao abrir o site) -->
+    <div id="initialLoading" class="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-50 transition-opacity duration-700">
+        <div class="relative w-20 h-20 mb-6">
+            <div class="absolute inset-0 border-4 border-slate-800 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-cyan-400 rounded-full animate-spin border-t-transparent"></div>
+        </div>
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2 animate-pulse">
+            Optimizer Hub Pro
+        </h1>
+        <p id="loadingStatus" class="text-slate-400 text-sm tracking-wide">Carregando recursos do sistema...</p>
+        
+        <!-- Barra de Progresso -->
+        <div class="w-64 h-1.5 bg-slate-900 rounded-full mt-6 overflow-hidden border border-slate-800">
+            <div id="progressBar" class="h-full bg-cyan-400 w-0 transition-all duration-300"></div>
+        </div>
+    </div>
+
+    <!-- 2. Tela de Login com Senha (Inicia oculta, aparece depois do carregamento) -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-950/95 flex items-center justify-center z-40 hidden opacity-0 transition-opacity duration-500">
         <div class="bg-slate-900/95 border border-slate-800 p-8 rounded-3xl shadow-2xl w-[420px] text-center backdrop-blur-md mx-4">
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
                 Acesso Restrito
-            </h1>
+            </h2>
             <p class="text-slate-400 text-sm mb-6">Digite a senha para desbloquear o painel</p>
 
             <input type="password" id="senhaInput" placeholder="Digite a senha..." class="w-full px-4 py-3 mb-4 bg-slate-950 border border-slate-800 rounded-xl text-white text-center focus:outline-none focus:border-cyan-500 transition-colors">
@@ -29,7 +46,7 @@
         </div>
     </div>
 
-    <!-- Tela de Carregamento (Overlay ao executar funções) -->
+    <!-- 3. Tela de Carregamento Interna (Aparece ao clicar em otimizar) -->
     <div id="loadingModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center z-50 hidden">
         <div class="w-16 h-16 border-4 border-slate-800 border-t-cyan-400 rounded-full animate-spin mb-4"></div>
         <h2 id="loadingText" class="text-xl font-bold text-cyan-400 tracking-wide animate-pulse">Otimizando sistema...</h2>
@@ -94,7 +111,7 @@
             </button>
         </div>
 
-        <!-- Card 4: Boost Geral (Destaque) -->
+        <!-- Card 4: Boost Geral -->
         <div class="bg-slate-900/90 border border-slate-800 hover:border-cyan-500/60 p-6 rounded-2xl shadow-xl flex flex-col justify-between backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.2)] group">
             <div>
                 <div class="flex items-center gap-3 mb-3">
@@ -116,6 +133,35 @@
     </footer>
 
     <script>
+        // Simula o carregamento inicial ao entrar na página
+        window.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.getElementById('progressBar');
+            const loadingStatus = document.getElementById('loadingStatus');
+            const initialLoading = document.getElementById('initialLoading');
+            const loginModal = document.getElementById('loginModal');
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 15) + 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // Atualiza texto e esconde tela de carregamento inicial
+                    loadingStatus.innerText = "Sistema pronto!";
+                    setTimeout(() => {
+                        initialLoading.classList.add('opacity-0');
+                        setTimeout(() => {
+                            initialLoading.style.display = 'none';
+                            loginModal.classList.remove('hidden');
+                            setTimeout(() => loginModal.classList.remove('opacity-0'), 50);
+                        }, 500);
+                    }, 400);
+                }
+                progressBar.style.width = progress + '%';
+            }, 200);
+        });
+
         function verificarSenha() {
             const senhaDigitada = document.getElementById('senhaInput').value;
             const loginModal = document.getElementById('loginModal');
@@ -123,8 +169,11 @@
             const erroSenha = document.getElementById('erroSenha');
 
             if (senhaDigitada === 'FPS') {
-                loginModal.classList.add('hidden');
-                painelHub.classList.remove('hidden');
+                loginModal.style.opacity = '0';
+                setTimeout(() => {
+                    loginModal.classList.add('hidden');
+                    painelHub.classList.remove('hidden');
+                }, 300);
             } else {
                 erroSenha.classList.remove('hidden');
                 document.getElementById('senhaInput').value = '';
@@ -153,7 +202,6 @@
                 msgSucesso = "Boost Completo finalizado! 🔥";
             }
 
-            // Mostra a tela de carregamento bonita com spinner
             loadingText.innerText = mensagem;
             loadingModal.classList.remove('hidden');
 
