@@ -11,7 +11,7 @@
     <!-- Camada escura por cima da imagem -->
     <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-[3px] z-0"></div>
 
-    <!-- 1. Tela de Carregamento Inicial com Textos Dinâmicos das Otimizações -->
+    <!-- 1. TELA DE CARREGAMENTO INICIAL (Garantida antes da senha) -->
     <div id="initialLoading" class="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-50 transition-opacity duration-700">
         <div class="relative w-20 h-20 mb-6">
             <div class="absolute inset-0 border-4 border-slate-800 rounded-full"></div>
@@ -20,8 +20,8 @@
         <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
             Optimizer Hub Pro
         </h1>
-        <!-- Texto dinâmico que muda durante o carregamento -->
-        <p id="loadingStatus" class="text-cyan-400 text-sm tracking-wide font-medium h-6">Iniciando motor de otimização...</p>
+        <!-- Texto dinâmico das otimizações -->
+        <p id="loadingStatus" class="text-cyan-400 text-sm tracking-wide font-medium h-6 text-center px-4">Iniciando motor de otimização...</p>
         
         <!-- Barra de Progresso -->
         <div class="w-72 h-2 bg-slate-900 rounded-full mt-6 overflow-hidden border border-slate-800 shadow-inner">
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <!-- 2. Tela de Login com Senha (Inicia totalmente oculta) -->
+    <!-- 2. TELA DE LOGIN COM SENHA (Inicia oculta, aparece 100% após o carregamento) -->
     <div id="loginModal" class="fixed inset-0 bg-slate-950/95 flex items-center justify-center z-40 hidden opacity-0 transition-opacity duration-500">
         <div class="bg-slate-900/95 border border-slate-800 p-8 rounded-3xl shadow-2xl w-[420px] text-center backdrop-blur-md mx-4">
             <h2 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <!-- 3. Tela de Carregamento Interna (Aparece ao clicar em otimizar) -->
+    <!-- 3. TELA DE CARREGAMENTO INTERNA (Aparece ao clicar em otimizar) -->
     <div id="loadingModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center z-50 hidden">
         <div class="w-16 h-16 border-4 border-slate-800 border-t-cyan-400 rounded-full animate-spin mb-4"></div>
         <h2 id="loadingText" class="text-xl font-bold text-cyan-400 tracking-wide animate-pulse">Otimizando sistema...</h2>
@@ -134,8 +134,8 @@
     </footer>
 
     <script>
-        // Controla o carregamento inicial e altera os textos das otimizações dinamicamente
-        window.addEventListener('load', () => {
+        // Execução garantida da tela de carregamento inicial com textos das otimizações
+        window.addEventListener('DOMContentLoaded', () => {
             const progressBar = document.getElementById('progressBar');
             const loadingStatus = document.getElementById('loadingStatus');
             const initialLoading = document.getElementById('initialLoading');
@@ -145,7 +145,7 @@
             const interval = setInterval(() => {
                 progress += 10;
 
-                // Altera o texto de acordo com o progresso atual
+                // Textos dinâmicos baseados no progresso
                 if (progress <= 25) {
                     loadingStatus.innerText = "Carregando arquivos de registro do sistema...";
                 } else if (progress <= 55) {
@@ -170,7 +170,7 @@
                     }, 400);
                 }
                 progressBar.style.width = progress + '%';
-            }, 200);
+            }, 250);
         });
 
         function verificarSenha() {
