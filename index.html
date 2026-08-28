@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Otimização - Boost</title>
+    <title>Painel de Otimização - Avançado</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-950 text-white font-sans flex items-center justify-center h-screen">
 
-    <!-- Tela de Login / Senha -->
+    <!-- Tela de Login com Senha -->
     <div id="loginModal" class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl w-96 text-center">
         <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
             Acesso Restrito
@@ -24,20 +24,37 @@
         <div id="erroSenha" class="mt-4 text-xs text-red-500 hidden">Senha incorreta! Tente novamente.</div>
     </div>
 
-    <!-- Painel de Otimização (Inicia Oculto) -->
-    <div id="painelHub" class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl w-96 text-center hidden">
-        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
-            Optimizer Hub
+    <!-- Painel de Otimização com Múltiplas Funções (Inicia Oculto) -->
+    <div id="painelHub" class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl w-[420px] text-center hidden">
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-1">
+            Optimizer Hub Pro
         </h1>
-        <p class="text-slate-400 text-sm mb-6">Painel 100% Seguro de Otimização</p>
+        <p class="text-slate-400 text-xs mb-6">Painel de Desempenho e Periféricos</p>
 
-        <!-- Botão com Animação -->
-        <button onclick="executarBoost()" id="boostBtn" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all duration-300 transform active:scale-95 shadow-lg shadow-cyan-500/20">
-            Executar Boost Geral
-        </button>
+        <div class="space-y-3">
+            <!-- Botão 1: Aumentar FPS -->
+            <button onclick="executarFuncao('fps', this)" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-semibold rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow">
+                🚀 Aumentar FPS (Prioridade Máxima)
+            </button>
 
-        <!-- Status -->
-        <div id="status" class="mt-4 text-xs text-slate-500">Sistema pronto para otimizar.</div>
+            <!-- Botão 2: Boost do Teclado -->
+            <button onclick="executarFuncao('teclado', this)" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-semibold rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow">
+                ⌨️ Boost do Teclado (Zerar Delay)
+            </button>
+
+            <!-- Botão 3: Boost do Mouse -->
+            <button onclick="executarFuncao('mouse', this)" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-400 font-semibold rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow">
+                🖱️ Boost do Mouse (Ajustar Polling/Sensibilidade)
+            </button>
+
+            <!-- Botão 4: Boost Geral -->
+            <button onclick="executarFuncao('geral', this)" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all transform active:scale-95 shadow-lg shadow-cyan-500/20 text-sm mt-2">
+                ⚡ Executar Boost Completo
+            </button>
+        </div>
+
+        <!-- Status dinâmico -->
+        <div id="status" class="mt-4 text-xs text-slate-400 min-h-[20px]">Sistema pronto para otimizar.</div>
     </div>
 
     <script>
@@ -47,7 +64,6 @@
             const painelHub = document.getElementById('painelHub');
             const erroSenha = document.getElementById('erroSenha');
 
-            // Senha configurada como "FPS"
             if (senhaDigitada === 'FPS') {
                 loginModal.classList.add('hidden');
                 painelHub.classList.remove('hidden');
@@ -57,19 +73,37 @@
             }
         }
 
-        function executarBoost() {
-            const btn = document.getElementById('boostBtn');
+        function executarFuncao(tipo, botao) {
             const status = document.getElementById('status');
             
-            btn.disabled = true;
-            btn.classList.add('opacity-50', 'cursor-not-allowed');
-            status.innerText = "Otimizando registros e limpando temporários...";
-            status.className = "mt-4 text-xs text-cyan-400";
+            // Mensagens personalizadas para cada botão
+            let msgInicio = "";
+            let msgFim = "";
+
+            if (tipo === 'fps') {
+                msgInicio = "Aplicando tweaks de registro para estabilizar FPS...";
+                msgFim = "FPS Otimizado com sucesso! Ganhos aplicados. 🚀";
+            } else if (tipo === 'teclado') {
+                msgInicio = "Reduzindo o tempo de resposta (Filter Keys / Response Rate)...";
+                msgFim = "Boost do Teclado aplicado! Resposta instantânea. ⌨️";
+            } else if (tipo === 'mouse') {
+                msgInicio = "Otimizando taxa de leitura do sensor USB (Polling Rate)...";
+                msgFim = "Boost do Mouse aplicado com sucesso! 🖱️";
+            } else if (tipo === 'geral') {
+                msgInicio = "Executando limpeza profunda de temporários e otimização total...";
+                msgFim = "Boost Completo finalizado com sucesso! 🔥";
+            }
+
+            botao.disabled = true;
+            botao.classList.add('opacity-50', 'cursor-not-allowed');
+            status.innerText = msgInicio;
+            status.className = "mt-4 text-xs text-cyan-400 font-medium";
 
             setTimeout(() => {
-                status.innerText = "Boost concluído com sucesso! 🚀";
-                btn.disabled = false;
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                status.innerText = msgFim;
+                status.className = "mt-4 text-xs text-emerald-400 font-medium";
+                botao.disabled = false;
+                botao.classList.remove('opacity-50', 'cursor-not-allowed');
             }, 2500);
         }
     </script>
