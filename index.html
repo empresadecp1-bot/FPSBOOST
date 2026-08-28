@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subway Surfers • Hub Definitivo</title>
+    <title>Subway Surfers • Atlanta Enhanced Edition</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
 
@@ -15,7 +15,7 @@
         }
 
         body {
-            background: #0f1015;
+            background: #0b0c10;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -25,12 +25,12 @@
 
         header {
             width: 100%;
-            background: linear-gradient(180deg, rgba(20,21,30,0.9) 0%, rgba(15,16,21,0.5) 100%);
+            background: linear-gradient(180deg, rgba(20,21,30,0.95) 0%, rgba(11,12,16,0.8) 100%);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ffcc00;
+            border-bottom: 2px solid #ff4757;
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
 
@@ -41,9 +41,9 @@
         }
 
         .logo-icon {
-            font-size: 2rem;
-            background: #ffcc00;
-            color: #0f1015;
+            font-size: 1.8rem;
+            background: #ff4757;
+            color: #ffffff;
             width: 45px;
             height: 45px;
             display: flex;
@@ -51,34 +51,34 @@
             justify-content: center;
             border-radius: 10px;
             font-weight: 900;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.4);
         }
 
         .logo-text h1 {
-            font-size: 1.4rem;
-            color: #ffcc00;
+            font-size: 1.3rem;
+            color: #ff4757;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .logo-text span {
-            font-size: 0.75rem;
-            color: #00f2fe;
+            font-size: 0.7rem;
+            color: #2ed573;
             font-weight: 700;
             letter-spacing: 2px;
         }
 
         .resource-hud {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
         .res-badge {
             background: #1a1c26;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -87,7 +87,6 @@
 
         .res-badge.coins { color: #ffcc00; border-color: rgba(255,204,0,0.3); }
         .res-badge.keys { color: #00f2fe; border-color: rgba(0,242,254,0.3); }
-        .res-badge.skins { color: #ff5252; border-color: rgba(255,82,82,0.3); }
 
         .main-container {
             width: 100%;
@@ -106,7 +105,7 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            border: 2px solid rgba(255, 204, 0, 0.3);
+            border: 2px solid rgba(255, 71, 87, 0.3);
         }
 
         iframe {
@@ -170,20 +169,25 @@
         }
 
         .map-card:hover {
-            border-color: #ffcc00;
+            border-color: #ff4757;
             transform: translateY(-4px);
             background: #212538;
-            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.2);
+        }
+
+        .map-card.special {
+            border-color: #ff4757;
+            background: linear-gradient(135deg, rgba(255,71,87,0.1), rgba(26,29,45,0.8));
         }
 
         .map-icon { font-size: 1.8rem; }
-        .map-name { font-weight: 700; font-size: 1rem; color: #ffcc00; }
+        .map-name { font-weight: 700; font-size: 1rem; color: #ff4757; }
         .map-desc { font-size: 0.8rem; color: #8c92a4; }
         
         .play-tag {
             margin-top: 5px;
-            background: #2ed573;
-            color: #0f1015;
+            background: #ff4757;
+            color: #ffffff;
             padding: 4px 8px;
             border-radius: 6px;
             font-size: 0.75rem;
@@ -211,51 +215,45 @@
 
     <header>
         <div class="logo-area">
-            <div class="logo-icon">SS</div>
+            <div class="logo-icon">ATL</div>
             <div class="logo-text">
                 <h1>Subway Surfers</h1>
-                <span>Custom Edition Hub</span>
+                <span>Atlanta Enhanced Edition</span>
             </div>
         </div>
 
         <div class="resource-hud">
-            <div class="res-badge coins">🪙 999.999+ Moedas</div>
-            <div class="res-badge keys">🔑 999.999+ Chaves</div>
-            <div class="res-badge skins">👤 100% Skins</div>
+            <div class="res-badge coins">🪙 Moedas Infinitas</div>
+            <div class="res-badge keys">🔑 Chaves Infinitas</div>
         </div>
     </header>
 
     <div class="main-container">
         
+        <!-- Tela de Exibição Principal -->
         <div class="game-viewport">
-            <iframe src="https://html5.gamemonetize.com/co8897z7fgg9197pfdk9w0440h6n6b1w/" allowfullscreen></iframe>
+            <iframe src="https://poki.com/en/g/subway-surfers" allowfullscreen></iframe>
         </div>
 
+        <!-- Painel de Mapas com Edição Atlanta em Destaque -->
         <div class="maps-panel">
             <div class="panel-header">
-                <h3>🌍 Escolha o Seu Mapa World Tour (Sem Erros)</h3>
-                <span class="status-live">● 100% Funcional</span>
+                <h3>🍑 Selecione o Mapa (Atlanta Edition & World Tour)</h3>
+                <span class="status-live">● Servidor Estável</span>
             </div>
 
             <div class="maps-grid">
-                <a href="https://html5.gamemonetize.com/co8897z7fgg9197pfdk9w0440h6n6b1w/" target="_blank" class="map-card">
-                    <span class="map-icon">🚇</span>
-                    <span class="map-name">Original Core</span>
-                    <span class="map-desc">Versão clássica sem travamentos</span>
-                    <div class="play-tag">JOGAR AGORA ➔</div>
-                </a>
-
-                <a href="https://poki.com/en/g/subway-surfers" target="_blank" class="map-card">
-                    <span class="map-icon">🌆</span>
-                    <span class="map-name">World Tour Principal</span>
-                    <span class="map-desc">Servidor Oficial Poki WebGL</span>
-                    <div class="play-tag">JOGAR AGORA ➔</div>
+                <a href="https://poki.com/en/g/subway-surfers" target="_blank" class="map-card special">
+                    <span class="map-icon">🍑</span>
+                    <span class="map-name" style="color: #ff4757;">Atlanta Enhanced</span>
+                    <span class="map-desc">Edição especial temática com trilhos urbanos</span>
+                    <div class="play-tag">JOGAR ATLANTA ➔</div>
                 </a>
 
                 <a href="https://poki.com/en/g/subway-surfers-venice" target="_blank" class="map-card">
                     <span class="map-icon">🏖️</span>
                     <span class="map-name">Veneza Map</span>
-                    <span class="map-desc">Cenário exclusivo dos canais</span>
+                    <span class="map-desc">Canais e pontes exclusivas</span>
                     <div class="play-tag">JOGAR AGORA ➔</div>
                 </a>
 
@@ -265,13 +263,20 @@
                     <span class="map-desc">Trilhos de inverno e neve</span>
                     <div class="play-tag">JOGAR AGORA ➔</div>
                 </a>
+
+                <a href="https://html5.gamemonetize.com/co8897z7fgg9197pfdk9w0440h6n6b1w/" target="_blank" class="map-card">
+                    <span class="map-icon">🚇</span>
+                    <span class="map-name">Original Core</span>
+                    <span class="map-desc">Versão clássica otimizada</span>
+                    <div class="play-tag">JOGAR AGORA ➔</div>
+                </a>
             </div>
         </div>
 
     </div>
 
     <footer>
-        Subway Surfers Custom Engine • Jogue sem restrições de segurança ou tela preta.
+        Subway Surfers • Atlanta Enhanced Edition • tavvkkj.xyz Hub
     </footer>
 
 </body>
