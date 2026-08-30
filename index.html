@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Página HTML Moderna</title>
+    <title>Minha Própria IA de Chat</title>
     <style>
         * {
             margin: 0;
@@ -20,31 +20,75 @@
             min-height: 100vh;
             padding: 20px;
         }
-        .card {
+        .chat-container {
             background: #1e293b;
-            padding: 40px;
+            padding: 25px;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
-            text-align: center;
             border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
         }
         h1 {
             color: #38bdf8;
             margin-bottom: 15px;
-            font-size: 28px;
+            font-size: 24px;
+            text-align: center;
         }
-        p {
-            color: #94a3b8;
-            margin-bottom: 25px;
-            line-height: 1.6;
+        .chat-history {
+            flex: 1;
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 15px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .message {
+            padding: 10px 14px;
+            border-radius: 8px;
+            max-width: 80%;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .user-message {
+            background-color: #0284c7;
+            color: white;
+            align-self: flex-end;
+        }
+        .ai-message {
+            background-color: #334155;
+            color: #f8fafc;
+            align-self: flex-start;
+        }
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            font-size: 16px;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #0284c7;
         }
         .btn {
             background-color: #0284c7;
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 0 20px;
             font-size: 16px;
             font-weight: bold;
             border-radius: 8px;
@@ -54,26 +98,87 @@
         .btn:hover {
             background-color: #0369a1;
         }
-        #mensagem {
-            margin-top: 20px;
-            font-weight: 500;
-            color: #34d399;
-        }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>Olá, Mundo! 🚀</h1>
-        <p>Este é um arquivo HTML completo, estilizado com CSS embutido e interativo com JavaScript. Salve este código como <strong>index.html</strong> e abra no seu navegador.</p>
-        <button class="btn" onclick="clicarBotao()">Clique em Mim</button>
-        <p id="mensagem"></p>
+    <div class="chat-container">
+        <h1>Meu Chatbot IA 🚀</h1>
+        
+        <div id="chatHistory" class="chat-history">
+            <div class="message ai-message">Olá! Sou a sua IA pessoal rodando direto no HTML. O que mandas?</div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Escreva algo para a IA..." onkeypress="checarEnter(event)">
+            <button class="btn" onclick="enviarMensagem()">Enviar</button>
+        </div>
     </div>
 
     <script>
-        function clicarBotao() {
-            const mensagem = document.getElementById("mensagem");
-            mensagem.textContent = "Parabéns! O seu código HTML e JavaScript está funcionando perfeitamente.";
+        // Substitua 'SUA_CHAVE_DE_API' pela sua chave real da API do Google Gemini
+        const API_KEY = "SUA_CHAVE_DE_API";
+
+        async function enviarMensagem() {
+            const input = document.getElementById("userInput");
+            const history = document.getElementById("chatHistory");
+            const texto = input.value.trim();
+
+            if (!texto) return;
+
+            // 1. Mostra a mensagem do usuário na tela
+            history.innerHTML += `<div class="message user-message">${escapeHtml(texto)}</div>`;
+            input.value = "";
+            history.scrollTop = history.scrollHeight;
+
+            // 2. Mostra um aviso temporário de carregamento da IA
+            const loadingId = "loading-" + Date.now();
+            history.innerHTML += `<div id="${loadingId}" class="message ai-message">Pensando...</div>`;
+            history.scrollTop = history.scrollHeight;
+
+            try {
+                // 3. Faz a requisição direto para a API do Gemini via JavaScript (REST)
+                const resposta = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: texto }]
+                        }]
+                    })
+                });
+
+                const dados = await resposta.json();
+                
+                // Remove o "Pensando..."
+                document.getElementById(loadingId).remove();
+
+                if (dados.candidates && dados.candidates[0].content) {
+                    const respostaIA = dados.candidates[0].content.parts[0].text;
+                    history.innerHTML += `<div class="message ai-message">${escapeHtml(respostaIA)}</div>`;
+                } else {
+                    history.innerHTML += `<div class="message ai-message">Ocorreu um erro ao processar a resposta. Verifique sua chave da API.</div>`;
+                }
+
+            } catch (erro) {
+                document.getElementById(loadingId).remove();
+                history.innerHTML += `<div class="message ai-message">Erro de conexão: ${erro.message}</div>`;
+            }
+
+            history.scrollTop = history.scrollHeight;
+        }
+
+        function checarEnter(event) {
+            if (event.key === "Enter") {
+                enviarMensagem();
+            }
+        }
+
+        // Função para evitar injeção de HTML acidental no chat
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
     </script>
 
