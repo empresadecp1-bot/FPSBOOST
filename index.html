@@ -1,283 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subway Surfers • Atlanta Enhanced Edition</title>
+    <title>Minha Página HTML Moderna</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
-            background: #0b0c10;
-            color: #ffffff;
-            min-height: 100vh;
+            background-color: #0f172a;
+            color: #f8fafc;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            width: 100%;
-            background: linear-gradient(180deg, rgba(20,21,30,0.95) 0%, rgba(11,12,16,0.8) 100%);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #ff4757;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            font-size: 1.8rem;
-            background: #ff4757;
-            color: #ffffff;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            border-radius: 10px;
-            font-weight: 900;
-            box-shadow: 0 0 15px rgba(255, 71, 87, 0.4);
-        }
-
-        .logo-text h1 {
-            font-size: 1.3rem;
-            color: #ff4757;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .logo-text span {
-            font-size: 0.7rem;
-            color: #2ed573;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .resource-hud {
-            display: flex;
-            gap: 10px;
-        }
-
-        .res-badge {
-            background: #1a1c26;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            display: flex;
             align-items: center;
-            gap: 6px;
-        }
-
-        .res-badge.coins { color: #ffcc00; border-color: rgba(255,204,0,0.3); }
-        .res-badge.keys { color: #00f2fe; border-color: rgba(0,242,254,0.3); }
-
-        .main-container {
-            width: 100%;
-            max-width: 1100px;
+            min-height: 100vh;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
         }
-
-        .game-viewport {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #000;
+        .card {
+            background: #1e293b;
+            padding: 40px;
             border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            border: 2px solid rgba(255, 71, 87, 0.3);
-        }
-
-        iframe {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
             width: 100%;
-            height: 100%;
-            border: none;
-            background: #000;
+            text-align: center;
+            border: 1px solid #334155;
         }
-
-        .maps-panel {
-            background: #141620;
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        h1 {
+            color: #38bdf8;
             margin-bottom: 15px;
+            font-size: 28px;
         }
-
-        .panel-header h3 {
-            font-size: 1.1rem;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
-
-        .status-live {
-            background: rgba(46, 213, 115, 0.15);
-            color: #2ed573;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            border: 1px solid rgba(46, 213, 115, 0.3);
-        }
-
-        .maps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
-
-        .map-card {
-            background: #1a1d2d;
-            border: 2px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 16px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            text-align: left;
+        .btn {
+            background-color: #0284c7;
             color: white;
-            text-decoration: none;
-        }
-
-        .map-card:hover {
-            border-color: #ff4757;
-            transform: translateY(-4px);
-            background: #212538;
-            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.2);
-        }
-
-        .map-card.special {
-            border-color: #ff4757;
-            background: linear-gradient(135deg, rgba(255,71,87,0.1), rgba(26,29,45,0.8));
-        }
-
-        .map-icon { font-size: 1.8rem; }
-        .map-name { font-weight: 700; font-size: 1rem; color: #ff4757; }
-        .map-desc { font-size: 0.8rem; color: #8c92a4; }
-        
-        .play-tag {
-            margin-top: 5px;
-            background: #ff4757;
-            color: #ffffff;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
             font-weight: bold;
-            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #6c757d;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            width: 100%;
-            margin-top: auto;
+        .btn:hover {
+            background-color: #0369a1;
         }
-
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; }
-            .resource-hud { width: 100%; justify-content: center; flex-wrap: wrap; }
+        #mensagem {
+            margin-top: 20px;
+            font-weight: 500;
+            color: #34d399;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-area">
-            <div class="logo-icon">ATL</div>
-            <div class="logo-text">
-                <h1>Subway Surfers</h1>
-                <span>Atlanta Enhanced Edition</span>
-            </div>
-        </div>
-
-        <div class="resource-hud">
-            <div class="res-badge coins">🪙 Moedas Infinitas</div>
-            <div class="res-badge keys">🔑 Chaves Infinitas</div>
-        </div>
-    </header>
-
-    <div class="main-container">
-        
-        <!-- Tela de Exibição Principal -->
-        <div class="game-viewport">
-            <iframe src="https://poki.com/en/g/subway-surfers" allowfullscreen></iframe>
-        </div>
-
-        <!-- Painel de Mapas com Edição Atlanta em Destaque -->
-        <div class="maps-panel">
-            <div class="panel-header">
-                <h3>🍑 Selecione o Mapa (Atlanta Edition & World Tour)</h3>
-                <span class="status-live">● Servidor Estável</span>
-            </div>
-
-            <div class="maps-grid">
-                <a href="https://poki.com/en/g/subway-surfers" target="_blank" class="map-card special">
-                    <span class="map-icon">🍑</span>
-                    <span class="map-name" style="color: #ff4757;">Atlanta Enhanced</span>
-                    <span class="map-desc">Edição especial temática com trilhos urbanos</span>
-                    <div class="play-tag">JOGAR ATLANTA ➔</div>
-                </a>
-
-                <a href="https://poki.com/en/g/subway-surfers-venice" target="_blank" class="map-card">
-                    <span class="map-icon">🏖️</span>
-                    <span class="map-name">Veneza Map</span>
-                    <span class="map-desc">Canais e pontes exclusivas</span>
-                    <div class="play-tag">JOGAR AGORA ➔</div>
-                </a>
-
-                <a href="https://poki.com/en/g/subway-surfers-zurich" target="_blank" class="map-card">
-                    <span class="map-icon">❄️</span>
-                    <span class="map-name">Zurique Map</span>
-                    <span class="map-desc">Trilhos de inverno e neve</span>
-                    <div class="play-tag">JOGAR AGORA ➔</div>
-                </a>
-
-                <a href="https://html5.gamemonetize.com/co8897z7fgg9197pfdk9w0440h6n6b1w/" target="_blank" class="map-card">
-                    <span class="map-icon">🚇</span>
-                    <span class="map-name">Original Core</span>
-                    <span class="map-desc">Versão clássica otimizada</span>
-                    <div class="play-tag">JOGAR AGORA ➔</div>
-                </a>
-            </div>
-        </div>
-
+    <div class="card">
+        <h1>Olá, Mundo! 🚀</h1>
+        <p>Este é um arquivo HTML completo, estilizado com CSS embutido e interativo com JavaScript. Salve este código como <strong>index.html</strong> e abra no seu navegador.</p>
+        <button class="btn" onclick="clicarBotao()">Clique em Mim</button>
+        <p id="mensagem"></p>
     </div>
 
-    <footer>
-        Subway Surfers • Atlanta Enhanced Edition • tavvkkj.xyz Hub
-    </footer>
+    <script>
+        function clicarBotao() {
+            const mensagem = document.getElementById("mensagem");
+            mensagem.textContent = "Parabéns! O seu código HTML e JavaScript está funcionando perfeitamente.";
+        }
+    </script>
 
 </body>
 </html>
